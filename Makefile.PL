@@ -6,13 +6,13 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     NAME             => 'Mecom',
     AUTHOR           => q{Hector Valverde <hvalverde@uma.es>},
-    VERSION_FROM     => 'bin/mecom',
-    ABSTRACT_FROM    => 'doc/Mecom.pod',
+    VERSION_FROM     => 'lib/Mecom.pm',
+    ABSTRACT_FROM    => 'lib/Mecom.pm',
     LICENSE          => 'Perl_5',
     PL_FILES         => {},
     EXE_FILES 	     => ['bin/mecom'],
     MAN3PODS         => {
-	"doc/Mecom.pod" => "blib/man3/mecom.3pm"
+	"lib/Mecom.pm" => "blib/man3/mecom.3pm"
     },
     MIN_PERL_VERSION => 5.006,
     CONFIGURE_REQUIRES => {
