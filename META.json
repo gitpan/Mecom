@@ -1,5 +1,5 @@
 {
-   "abstract" : "Molecular Evolution for protein COMplexes",
+   "abstract" : "A Perl package for protein contact interfaces evolutive analysis",
    "author" : [
       "Hector Valverde <hvalverde@uma.es>"
    ],
@@ -32,10 +32,24 @@
       },
       "runtime" : {
          "requires" : {
+            "Bio::Align::IO" : "0",
+            "Bio::Align::Utilities" : "0",
+            "Bio::SeqIO" : "0",
+            "Bio::SimpleAlign" : "0",
+            "Bio::Structure::IO::pdb" : "0",
+            "Bio::Structure::Model" : "0",
+            "Bio::Structure::SetcStr::DSSP::Res" : "0",
+            "Bio::Tools::Run::Phylo::PAML::Yn00" : "0",
+            "Carp" : "0",
+            "Getopt::Long" : "0",
+            "IPC::Run" : "0",
+            "Number::Formating" : "0",
+            "Statistics::Basic" : "0",
+            "Statistics::Zed" : "0",
             "perl" : "5.006"
          }
       }
    },
    "release_status" : "stable",
-   "version" : "0.03"
+   "version" : "1.01"
 }
