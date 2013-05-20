@@ -19,7 +19,7 @@ package Mecom;
 use 5.006;
 use strict;
 no strict "refs";
-our $VERSION = '1.07';
+our $VERSION = '1.08';
 
 # Own modules
 use Mecom::Contact; 
@@ -460,6 +460,7 @@ sub get_gc                 { $_[0] -> {_gc}          }
 sub get_ocontact           { $_[0] -> {_ocontact}    }
 sub get_dsspbin            { $_[0] -> {_dsspbin}     }
 sub get_report             { $_[0] -> {_report}      }
+sub get_version            { return $VERSION         }
 # Proc
 sub get_structdata         { $_[0] -> {_struct_data} }
 sub get_lists              { $_[0] -> {_lists}       }
@@ -532,11 +533,11 @@ __END__
 
 =head1 NAME
 
-Mecom - A Perl package for protein contact interfaces evolutive analysis
+Mecom - A Perl module for protein contact interfaces evolutive analysis
 
 =head1 VERSION
 
-Version 1.07
+Version 1.08
 
 =head1 SYNOPSIS
 
