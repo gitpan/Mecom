@@ -19,7 +19,6 @@ no_index:
     - inc
 requires:
   Bio::Perl: 0
-  Bio::Tools::Run::Phylo::PAML::Yn00: 0
   Carp: 0
   Getopt::Long: 0
   IPC::Run: 0
@@ -27,4 +26,4 @@ requires:
   Statistics::Basic: 0
   Statistics::Zed: 0
   perl: 5.006
-version: 1.11
+version: 1.12

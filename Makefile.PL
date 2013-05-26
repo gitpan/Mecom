@@ -11,7 +11,7 @@ sub MY::constants {
    push(@m, $self->SUPER::constants(@_)); 
    push(@m, 
 	"PRGS =  baseml codeml basemlg mcmctree pamp evolver yn00 chi2\n",
-	"LIBS = -lm # -lM\n",
+	"LIBS = -lm -w # -lM\n",
 	"PAMLDIR = paml4.7/\n",
 	"SRC = \$(PAMLDIR)src/\n",
 	"BASEML = \$(SRC)baseml.c\n",
@@ -36,10 +36,12 @@ WriteMakefile(
     VERSION_FROM     => 'lib/Mecom.pm',
     ABSTRACT_FROM    => 'lib/Mecom.pm',
     LICENSE          => 'Perl_5',
-    EXE_FILES 	     => ['bin/mecom'],
-    # Params needed to install PAML
+    EXE_FILES 	     => ['bin/mecom', 'bin/dssp'],
     MAN3PODS         => {
-	"bin/mecom" => "blib/man3/mecom.3pm"
+	"docs/mecom.pod" => "blib/man3/mecom.3pm"
+    },
+    MAN3PODS         => {
+	"docs/mecom.pod" => "blib/man1/mecom.1"
     },
     MIN_PERL_VERSION => 5.006,
     CONFIGURE_REQUIRES => {
@@ -47,7 +49,6 @@ WriteMakefile(
     },
     PREREQ_PM => {
 	"Bio::Perl" => "0",
-	"Bio::Tools::Run::Phylo::PAML::Yn00" => "0",
 	"Carp" => "0",
 	"Getopt::Long" => "0",
 	"Number::FormatEng" => "0",
@@ -60,17 +61,9 @@ WriteMakefile(
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Mecom-*'},
-    realclean => { FILES => '$(PAMLDIR)bin/baseml
-			    $(PAMLDIR)bin/codeml
-			    $(PAMLDIR)bin/basemlg
-			    $(PAMLDIR)bin/mcmctree
-			    $(PAMLDIR)bin/pamp
-			    $(PAMLDIR)bin/evolver
-			    $(PAMLDIR)bin/chi2
-			    $(PAMLDIR)bin/yn00'},
-    depend => { '$(INST_SCRIPT)/mecom' => 'paml mvbin',
-	        #pure_install => 'installpaml'
-		},
+    realclean => { FILES => '*/.DS_Store'},
+    depend => { '$(INST_SCRIPT)/mecom' => 'configpaml' },
+
 );
 
 package MY;
@@ -97,12 +90,13 @@ yn00 : $(YN00) $(TOOLS) $(HEAD)
 	$(CC) $(CFLAGS) -o $@ $(YN00) $(TOOLS) $(LIBS)
 chi2 : $(CHI2)
 	$(CC) $(CFLAGS) -o $@ $(CHI2) $(LIBS)
-	
-mvbin : $(PRGS)
-	mv $(PRGS) $(PAMLDIR)bin/.
-	
-installpaml : all
-	cp -R $(PAMLDIR) $(INSTALLBIN)/$(PAMLDIR)
+configpaml : paml
+	$(CP) lib/Mecom/Config.bak.pm lib/Mecom/Config.pm
+	$(ECHO) "\n\nsub get_pamldir{ return \'$(INSTALLBIN)/\';}" >> lib/Mecom/Config.pm
+	$(ECHO) "\n\n1;" >> lib/Mecom/Config.pm
+	$(MV) $(PRGS) $(INST_BIN)/.
+	$(CP) -r $(PAMLDIR) $(INST_BIN)/.
+
 
  
 '}
