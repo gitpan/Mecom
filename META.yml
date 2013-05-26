@@ -27,4 +27,4 @@ requires:
   Statistics::Basic: 0
   Statistics::Zed: 0
   perl: 5.006
-version: 1.13
+version: 1.14
